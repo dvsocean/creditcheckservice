@@ -35,7 +35,33 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-contract-verifier</artifactId>
+			<!--NO NEED to specify version number as its provided by the BOM-->
+		</dependency>
 	</dependencies>
+
+	<!--
+		Spring cloud contract falls under the spring umbrella project,
+		because of this SCC uses something called a BOM (Bill of materials)
+		which is a dependency management construct. dependecyManagement
+	  brings in all the required dependencies for this current
+		spring project underneath the main umbrella project.
+	-->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Edgware.RELEASE</version>
+				<type>pom</type>
+				<!--IMPORT tag indicates that dependencies needed for SCC will be imported from SpringCloudUmbrella into this project -->
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>
@@ -43,6 +69,14 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<!--THIS PLUGIN ALLOWS MAVEN TO GENERATE STUBS AND TESTS FROM CONTRACTS-->
+			<plugin>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-contract-maven-plugin</artifactId>
+				<version>1.2.4.RELEASE</version>
+				<extensions>true</extensions>
+			</plugin>
+			<!--THIS PLUGIN ALLOWS MAVEN TO GENERATE STUBS AND TESTS FROM CONTRACTS-->
 		</plugins>
 	</build>
 
