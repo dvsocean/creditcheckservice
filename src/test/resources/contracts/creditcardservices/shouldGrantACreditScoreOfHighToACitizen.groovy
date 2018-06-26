@@ -6,11 +6,11 @@ Contract.make {
         url '/credit-scores'
         body """
         {
-            "citizenNumber": 1234
+            "citizenNumber" : 1234
         }
         """
         headers {
-            contentType applicationJson()
+            contentType applicationJsonUtf8()
         }
     }
 
@@ -18,11 +18,11 @@ Contract.make {
         status 200
         body """
         {
-            "score":"HIGH"
+            "score" : "HIGH"
         }
         """
         headers {
-            contentType applicationJson()
+            contentType applicationJsonUtf8()
         }
     }
 }
