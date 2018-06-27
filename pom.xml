@@ -36,6 +36,13 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Provides RestAssuredMockMvc.standaloneSetup(), this is required to assert agreed upon response with the actual response -->
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>spring-mock-mvc</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-contract-verifier</artifactId>
@@ -73,8 +80,11 @@
 			<plugin>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-contract-maven-plugin</artifactId>
-				<version>1.2.4.RELEASE</version>
+				<version>1.2.1.RELEASE</version>
 				<extensions>true</extensions>
+				<configuration>
+					<baseClassForTests>com.retailbank.creditcheckservice.BaseContractTest</baseClassForTests>
+				</configuration>
 			</plugin>
 			<!--THIS PLUGIN ALLOWS MAVEN TO GENERATE STUBS AND TESTS FROM CONTRACTS-->
 		</plugins>
